@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Goose Farming Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5e6c8;
+    --parchment-dark: #e8d5a3;
+    --ink: #2a1a0a;
+    --rust: #8b3a1a;
+    --gold: #b8860b;
+    --sage: #4a5e3a;
+    --cream: #fdf6e3;
+  }
+
+  body {
+    background: #1a1008;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'IM Fell English', serif;
+  }
+
+  .flyer {
+    width: 680px;
+    background: var(--parchment);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(0,0,0,0.8), inset 0 0 120px rgba(139,58,26,0.08);
+  }
+
+  .flyer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse at 20% 10%, rgba(139,58,26,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(139,58,26,0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(184,134,11,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .flyer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.4;
+  }
+
+  .content {
+    position: relative;
+    z-index: 3;
+  }
+
+  .border-frame {
+    position: absolute;
+    inset: 14px;
+    border: 2px solid var(--rust);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .border-frame::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--gold);
+    opacity: 0.6;
+  }
+
+  .corner {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    z-index: 11;
+  }
+  .corner svg { width: 100%; height: 100%; }
+  .corner-tl { top: 6px; left: 6px; }
+  .corner-tr { top: 6px; right: 6px; transform: scaleX(-1); }
+  .corner-bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+  .corner-br { bottom: 6px; right: 6px; transform: scale(-1); }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--sage);
+    padding: 36px 60px 28px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    font-size: 10px;
+    color: var(--parchment-dark);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+
+  .goose-icon {
+    font-size: 42px;
+    display: block;
+    margin-bottom: 10px;
+    filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.4));
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--parchment);
+    line-height: 1;
+    letter-spacing: -1px;
+    text-shadow: 2px 3px 0 rgba(0,0,0,0.3);
+  }
+
+  .main-title em {
+    font-style: italic;
+    color: var(--parchment-dark);
+  }
+
+  .club-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--gold);
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .motto {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--parchment-dark);
+    margin-top: 10px;
+    opacity: 0.85;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── STRIP ── */
+  .strip {
+    background: var(--parchment-dark);
+    border-top: 1px solid rgba(139,58,26,0.3);
+    border-bottom: 1px solid rgba(139,58,26,0.3);
+    padding: 11px 55px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+    letter-spacing: 0.07em;
+  }
+
+  /* ── BODY ── */
+  .body {
+    padding: 26px 55px;
+  }
+
+  /* About block */
+  .about-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.75;
+    text-align: center;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.3);
+    border-left: 3px solid var(--rust);
+    border-right: 3px solid var(--rust);
+    margin-bottom: 22px;
+  }
+
+  /* Section heading */
+  .section-head {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-head::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--sage);
+    opacity: 0.35;
+  }
+
+  /* Two-col offers */
+  .offers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .offer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(74,94,58,0.07);
+    border: 1px solid rgba(139,58,26,0.18);
+    padding: 12px 14px;
+  }
+
+  .offer-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .offer-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rust), transparent);
+    opacity: 0.4;
+  }
+  .divider-ornament { color: var(--rust); font-size: 16px; opacity: 0.65; }
+
+  /* Membership details table-style */
+  .membership {
+    margin-bottom: 22px;
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 9px 0;
+    border-bottom: 1px dashed rgba(139,58,26,0.2);
+  }
+
+  .detail-label {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 11.5px;
+    color: var(--rust);
+    min-width: 118px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .detail-value {
+    font-family: 'IM Fell English', serif;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+
+  /* Quote band */
+  .quote-band {
+    background: var(--rust);
+    margin: 0 -55px;
+    padding: 18px 55px;
+    text-align: center;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--parchment);
+    line-height: 1.55;
+  }
+
+  /* Who can join / responsibilities – two col */
+  .info-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 22px 0;
+  }
+
+  .info-box {
+    background: rgba(74,94,58,0.07);
+    border: 1px solid rgba(139,58,26,0.18);
+    padding: 14px 16px;
+  }
+
+  .info-box-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--rust);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(139,58,26,0.2);
+    letter-spacing: 0.02em;
+  }
+
+  .info-box-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+
+  /* CTA */
+  .cta {
+    text-align: center;
+    margin: 4px 0 6px;
+    padding: 18px;
+    border: 1.5px solid rgba(139,58,26,0.35);
+    background: rgba(255,255,255,0.25);
+  }
+
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--rust);
+    margin-bottom: 8px;
+  }
+
+  .cta-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .cta-link {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    border-bottom: 1px solid var(--sage);
+    padding-bottom: 1px;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--ink);
+    padding: 20px 55px;
+    text-align: center;
+    margin-top: 22px;
+  }
+
+  .footer-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 5px;
+  }
+
+  .footer-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    font-size: 10px;
+    color: var(--parchment-dark);
+    opacity: 0.65;
+    text-transform: uppercase;
+  }
+
+  .ornament-row {
+    text-align: center;
+    color: var(--rust);
+    opacity: 0.45;
+    font-size: 18px;
+    letter-spacing: 10px;
+    margin: 6px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+  <div class="border-frame"></div>
+
+  <!-- Corners -->
+  <div class="corner corner-tl"><svg viewBox="0 0 32 32" fill="none"><path d="M4 4 L4 28" stroke="#8b3a1a" stroke-width="1.5"/><path d="M4 4 L28 4" stroke="#8b3a1a" stroke-width="1.5"/><circle cx="4" cy="4" r="3" fill="#8b3a1a" opacity="0.5"/><path d="M10 4 Q10 10 4 10" stroke="#b8860b" stroke-width="0.8" fill="none" opacity="0.6"/></svg></div>
+  <div class="corner corner-tr"><svg viewBox="0 0 32 32" fill="none"><path d="M4 4 L4 28" stroke="#8b3a1a" stroke-width="1.5"/><path d="M4 4 L28 4" stroke="#8b3a1a" stroke-width="1.5"/><circle cx="4" cy="4" r="3" fill="#8b3a1a" opacity="0.5"/><path d="M10 4 Q10 10 4 10" stroke="#b8860b" stroke-width="0.8" fill="none" opacity="0.6"/></svg></div>
+  <div class="corner corner-bl"><svg viewBox="0 0 32 32" fill="none"><path d="M4 4 L4 28" stroke="#8b3a1a" stroke-width="1.5"/><path d="M4 4 L28 4" stroke="#8b3a1a" stroke-width="1.5"/><circle cx="4" cy="4" r="3" fill="#8b3a1a" opacity="0.5"/><path d="M10 4 Q10 10 4 10" stroke="#b8860b" stroke-width="0.8" fill="none" opacity="0.6"/></svg></div>
+  <div class="corner corner-br"><svg viewBox="0 0 32 32" fill="none"><path d="M4 4 L4 28" stroke="#8b3a1a" stroke-width="1.5"/><path d="M4 4 L28 4" stroke="#8b3a1a" stroke-width="1.5"/><circle cx="4" cy="4" r="3" fill="#8b3a1a" opacity="0.5"/><path d="M10 4 Q10 10 4 10" stroke="#b8860b" stroke-width="0.8" fill="none" opacity="0.6"/></svg></div>
+
+  <div class="content">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-label">&#10022; Regenerative Agriculture · Living History · Community &#10022;</div>
+      <span class="goose-icon">🪿</span>
+      <div class="main-title"><em>Green Goose</em><br>Farm</div>
+      <div class="club-name">The Farming Club — 2026 Season</div>
+      <div class="motto">"Yesterday's Traditions, Today's Health, Tomorrow's Hope"</div>
+    </div>
+
+    <!-- STRIP -->
+    <div class="strip">❦ &nbsp; A diverse animal farm practicing regenerative agriculture — honoring land, animals & community &nbsp; ❦</div>
+
+    <div class="body">
+
+      <!-- About -->
+      <div class="about-text">
+        The <strong>Green Goose Farming Club</strong> offers a hands-on opportunity to learn, grow, and contribute to a working regenerative farm. Members gain real experience creating their own intensive vegetable garden — from soil preparation and succession planting through to the fall harvest.
+      </div>
+
+      <!-- What the club offers -->
+      <div class="section-head">What the Club Offers</div>
+      <div class="offers">
+        <div class="offer-item">
+          <span class="offer-icon">🌱</span>
+          <div class="offer-text">Access to local <strong>historic farmland</strong> with deep agricultural roots</div>
+        </div>
+        <div class="offer-item">
+          <span class="offer-icon">🚜</span>
+          <div class="offer-text"><strong>Irrigation and tools</strong> provided — everything you need to get growing</div>
+        </div>
+        <div class="offer-item">
+          <span class="offer-icon">🤝</span>
+          <div class="offer-text"><strong>Skill & community building</strong> alongside fellow growers and stewards</div>
+        </div>
+        <div class="offer-item">
+          <span class="offer-icon">🥬</span>
+          <div class="offer-text">Potential for <strong>fresh, high-quality vegetables</strong> throughout the growing season</div>
+        </div>
+      </div>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-ornament">✦</div><div class="divider-line"></div></div>
+
+      <!-- Membership Details -->
+      <div class="membership">
+        <div class="section-head">Membership Details</div>
+        <div class="detail-row">
+          <div class="detail-label">Season</div>
+          <div class="detail-value">April – September &nbsp;·&nbsp; Orientation & selection in March</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Spots Available</div>
+          <div class="detail-value">Limited to <strong>6 members only</strong></div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Initiation Fee</div>
+          <div class="detail-value">$150 (covers irrigation costs)</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Commitment</div>
+          <div class="detail-value">Minimum 3 hours per week, flexible within open farm hours</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Farm Access</div>
+          <div class="detail-value">Wednesdays, Saturdays & Sundays &nbsp;·&nbsp; 10:00 AM – 4:00 PM</div>
+        </div>
+      </div>
+
+      <!-- Quote band -->
+      <div class="quote-band">
+        <div class="quote-text">Members work independently and collaboratively to cultivate a variety of vegetables throughout the season.<br>
+        <em>All work is done by hand, peasant fashion.</em> The harvest is shared between club members and Green Goose Farm,<br>reflecting the shared effort and care invested in the land.</div>
+      </div>
+
+      <!-- Who can join + Responsibilities -->
+      <div class="info-cols" style="margin-top:22px;">
+        <div class="info-box">
+          <div class="info-box-title">🌾 Who Can Join</div>
+          <div class="info-box-text">Open to anyone with an interest in sustainable agriculture — farmers, gardeners, students, and nature lovers alike. <strong>No prior experience required,</strong> just enthusiasm and dedication. Applicants should be fit, highly organized, and open to learning.</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">🐾 Our Animals & Land</div>
+          <div class="info-box-text">Green Goose is a diverse <strong>animal farm</strong> guided by sound ecological practices. Members become stewards of a thriving, resilient ecosystem — blending time-honored traditions with regenerative methods that restore the land for future generations.</div>
+        </div>
+      </div>
+
+      <div class="ornament-row">⸙ ⸙ ⸙</div>
+
+      <!-- CTA -->
+      <div class="cta">
+        <div class="cta-title">Ready to Join?</div>
+        <div class="cta-text">
+          Spaces are extremely limited — only <strong>6 members</strong> accepted for the 2026 season.<br>
+          Fill out the application form and find additional details at the links below.
+        </div>
+        <div style="margin-top:12px; display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--sage); margin-bottom:3px;">Apply Here</div>
+            <div style="font-family:'IM Fell English',serif; font-size:13px; color:var(--rust); font-style:italic;">[ Application Link ]</div>
+          </div>
+          <div>
+            <div style="font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--sage); margin-bottom:3px;">Learn More</div>
+            <div style="font-family:'IM Fell English',serif; font-size:13px; color:var(--rust); font-style:italic;">[ Details Link ]</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /body -->
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-tagline">Green Goose Farming Club</div>
+      <div class="footer-sub">Skill Building &nbsp;·&nbsp; Community &nbsp;·&nbsp; Connection</div>
+    </div>
+
+  </div><!-- /content -->
+</div>
+
+</body>
+</html>
