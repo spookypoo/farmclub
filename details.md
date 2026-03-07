@@ -3,3 +3,407 @@ title: Details
 layout: default
 permalink: https://spookypoo.github.io/farmclub/details
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farming Club Details – Green Goose Farm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --soil:       #2c1f0e;
+      --bark:       #4a3120;
+      --hay:        #c8a84b;
+      --hay-light:  #e8d5a0;
+      --sage:       #6b7c5c;
+      --sage-light: #a8b89a;
+      --cream:      #f5efe0;
+      --parchment:  #ede0c4;
+      --rust:       #8b4513;
+      --moss:       #3d5c3a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--soil);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.75;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    /* ── HEADER ── */
+    header {
+      background-color: var(--moss);
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.03) 40px,
+          rgba(255,255,255,0.03) 41px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.03) 40px,
+          rgba(255,255,255,0.03) 41px
+        );
+      color: var(--cream);
+      text-align: center;
+      padding: 36px 24px 30px;
+      position: relative;
+      border-bottom: 6px solid var(--hay);
+    }
+
+    header::before,
+    header::after {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 28px;
+      color: var(--hay);
+      opacity: 0.6;
+    }
+    header::before { left: 32px; }
+    header::after  { right: 32px; }
+
+    .header-eyebrow {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--hay-light);
+      margin-bottom: 14px;
+      opacity: 0.85;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+      color: var(--cream);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .header-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 18px auto 0;
+      max-width: 360px;
+    }
+    .header-rule span { flex: 1; height: 1px; background: var(--hay); opacity: 0.5; }
+    .header-rule em { color: var(--hay); font-size: 20px; font-style: normal; }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 36px 24px 48px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      margin-bottom: 36px;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .section-icon {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      background: var(--moss);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+      font-weight: 700;
+      color: var(--moss);
+      line-height: 1.2;
+    }
+
+    /* decorative rule under each heading */
+    .section h2::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--hay);
+      margin-top: 6px;
+      border-radius: 2px;
+    }
+
+    .section p {
+      color: var(--bark);
+      margin-bottom: 14px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    /* links */
+    a {
+      color: var(--rust);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    a:hover { color: var(--moss); }
+
+    /* ── CARD WRAPPER for some sections ── */
+    .card {
+      background: var(--parchment);
+      border: 1px solid rgba(74,49,32,0.18);
+      border-left: 5px solid var(--hay);
+      border-radius: 4px;
+      padding: 28px 32px;
+      box-shadow: 2px 4px 16px rgba(44,31,14,0.08);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 28px 0;
+      opacity: 0.45;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: repeating-linear-gradient(90deg, var(--bark) 0, var(--bark) 4px, transparent 4px, transparent 10px);
+    }
+    .divider span { font-size: 22px; color: var(--sage); }
+
+    /* ── TRAITS LIST ── */
+    .traits {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .traits li {
+      background: var(--cream);
+      border: 1px solid rgba(107,124,92,0.3);
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 15px;
+      color: var(--bark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .traits li::before {
+      content: '🌱';
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--soil);
+      color: var(--hay-light);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      border-top: 4px solid var(--hay);
+    }
+    footer a { color: var(--hay); }
+
+    .apply-btn {
+      display: inline-block;
+      margin: 24px auto 8px;
+      padding: 14px 44px;
+      background: var(--soil);
+      color: var(--cream);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 0;
+      border: 1.5px solid var(--hay-light);
+      box-shadow: none;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .apply-btn:hover {
+      background: var(--bark);
+      color: var(--hay-light);
+      border-color: var(--hay);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header        { animation: fadeUp 0.7s ease both; }
+    .section:nth-child(1) { animation: fadeUp 0.7s 0.15s ease both; }
+    .section:nth-child(2) { animation: fadeUp 0.7s 0.25s ease both; }
+    .section:nth-child(3) { animation: fadeUp 0.7s 0.35s ease both; }
+    .section:nth-child(4) { animation: fadeUp 0.7s 0.45s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .card { padding: 20px 18px; }
+      header::before, header::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="header-eyebrow">Green Goose Farm &nbsp;·&nbsp; Est. 2012</p>
+    <h1>Farming Club Details</h1>
+    <div class="header-rule">
+      <span></span>
+      <em>🌾</em>
+      <span></span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">🏡</div>
+        <h2>About The Farm</h2>
+      </div>
+      <div class="card">
+        <p>
+          Green Goose Farm started in 2012 as a small, diverse livestock operation nestled on a
+          historic property whose roots reach back to an 1890s homestead — originally a working
+          chicken farm. We raise sheep, pigs, and various poultry, and we are slowly restoring
+          the land to full operation and livability.
+        </p>
+        <p>
+          Our practices draw from <strong>Permaculture</strong> and <strong>Regenerative Agriculture</strong>,
+          primarily through intentional animal impact and the planting of trees, bushes, and pasture.
+          The land itself is our teacher, and every season brings new lessons.
+        </p>
+        <p>
+          Read an article about us at
+          <a href="https://fibershed.org/2022/08/26/green-goose-farm/" target="_blank" rel="noopener">Fibershed</a>,
+          and learn about our traveler hosting and internships at
+          <a href="https://www.workaway.info/en/host/895958539421" target="_blank" rel="noopener">Workaway</a>.
+        </p>
+      </div>
+    </section>
+
+    <div class="divider"><span>❧</span></div>
+
+    <!-- WHY WE ARE FORMING THIS CLUB -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">🤝</div>
+        <h2>Why We Are Forming This Club</h2>
+      </div>
+      <div class="card">
+        <p>
+          Many people dream of having their own farm one day, but few of us can realize that dream.
+          We know that living and working on this land is a privilege — and we want to share it with others.
+        </p>
+        <p>
+          We also know that society is suffering from a lack of connection: to each other, to the land,
+          and to our food. We are cash poor but land rich, and like the poor everywhere, we want to help others.
+          We also want to have fun and meet good people.
+        </p>
+      </div>
+    </section>
+
+    <div class="divider"><span>❧</span></div>
+
+    <!-- WHO SHOULD APPLY -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">🌿</div>
+        <h2>Who Should Apply</h2>
+      </div>
+      <p style="margin-bottom: 20px; color: var(--bark);">
+        We find that people who thrive on a farm bring a particular mix of character and intention.
+        You might be a great fit if you recognize yourself in several of these qualities:
+      </p>
+      <ul class="traits">
+        <li>Physically fit &amp; capable</li>
+        <li>Organized &amp; thoughtful</li>
+        <li>Curious &amp; open-minded</li>
+        <li>Collaborative by nature</li>
+        <li>Takes responsibility</li>
+        <li>Cares for what you touch</li>
+        <li>Seeks meaning beyond money</li>
+        <li>Wants a future worth having</li>
+      </ul>
+      <p style="margin-top: 20px; color: var(--bark);">
+        You are open to creating new connections, thinking differently about this world and our place in it.
+        You seek direction beyond a job or career, and you want to contribute to something better.
+      </p>
+    </section>
+
+    <div class="divider"><span>❧</span></div>
+
+    <!-- WHAT TO EXPECT -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">🌻</div>
+        <h2>What to Expect</h2>
+      </div>
+      <div class="card">
+        <p>
+          This is <em>not</em> a farming class or an internship — it is a <strong>group experiment</strong>.
+          Participants will plan and solve crop-growing strategies together, from developing the garden
+          plot through to final harvest. Most of the work will be carried out independently by Club members,
+          as the host farmer's time is already committed to other property operations.
+        </p>
+        <p>
+          The type and amount of vegetables grown will depend on the Club itself, with some seeds provided
+          by the Farm. Fertility for food grown will come from animal manures produced on-site.
+        </p>
+        <p>
+          We hope to gather for <strong>lunch breaks together on Saturdays</strong>, with other occasional
+          Club meetings throughout the season. Community and shared meals are as important to us as the harvest.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <div style="text-align:center; padding: 0 24px 60px;">
+    <a class="apply-btn" href="https://forms.gle/M7SwvzCPmbmTkUpX7" target="_blank" rel="noopener">Apply Now</a>
+  </div>
+
+  <footer>
+    <p>Green Goose Farm &nbsp;·&nbsp; Farming Club &nbsp;·&nbsp; <a href="https://spookypoo.github.io/farmclub/">Back to Main Page</a></p>
+  </footer>
+
+</body>
+</html>
