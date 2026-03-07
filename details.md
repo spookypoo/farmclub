@@ -303,7 +303,7 @@ permalink: /details/
         <p>
           Green Goose Farm started in 2012 as a small, diverse livestock operation nestled on a
           historic property whose roots reach back to an 1890s homestead — originally a working
-          chicken farm. We raise sheep, pigs, and various poultry, and we are slowly restoring
+          chicken farm, located in the Penngrove green belt just south of Cotati. We raise sheep, pigs, and various poultry, and we are slowly restoring
           the land to full operation and livability.
         </p>
         <p>
