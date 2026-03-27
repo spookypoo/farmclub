@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Green Goose Farming Club FAQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --soil:       #2c1f0e;
+      --bark:       #4a3120;
+      --hay:        #c8a84b;
+      --hay-light:  #e8d5a0;
+      --sage:       #6b7c5c;
+      --sage-light: #a8b89a;
+      --cream:      #f5efe0;
+      --parchment:  #ede0c4;
+      --rust:       #8b4513;
+      --moss:       #3d5c3a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--soil);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.75;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    /* ── HEADER ── */
+    header {
+      background-color: var(--moss);
+      background-image:
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px),
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px);
+      color: var(--cream);
+      text-align: center;
+      padding: 36px 24px 30px;
+      position: relative;
+      border-bottom: 6px solid var(--hay);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    header::before, header::after {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 28px;
+      color: var(--hay);
+      opacity: 0.6;
+    }
+    header::before { left: 32px; }
+    header::after  { right: 32px; }
+
+    .header-eyebrow {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--hay-light);
+      margin-bottom: 14px;
+      opacity: 0.85;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+      color: var(--cream);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .header-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 18px auto 0;
+      max-width: 360px;
+    }
+    .header-rule span { flex: 1; height: 1px; background: var(--hay); opacity: 0.5; }
+    .header-rule em { color: var(--hay); font-size: 20px; font-style: normal; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+
+    /* ── FAQ INTRO ── */
+    .faq-intro {
+      text-align: center;
+      margin-bottom: 40px;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+    .faq-intro p {
+      color: var(--bark);
+      font-style: italic;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* ── FAQ ITEM ── */
+    .faq-item {
+      background: var(--parchment);
+      border: 1px solid rgba(74,49,32,0.15);
+      border-left: 5px solid var(--hay);
+      border-radius: 4px;
+      padding: 26px 32px 22px;
+      margin-bottom: 18px;
+      box-shadow: 2px 4px 16px rgba(44,31,14,0.07);
+      opacity: 0;
+      animation: fadeUp 0.55s ease forwards;
+    }
+
+    .faq-question {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--moss);
+      line-height: 1.35;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .faq-question .q-label {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--hay);
+      background: var(--moss);
+      padding: 2px 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      line-height: 1.6;
+    }
+
+    .faq-answer {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.97rem;
+      color: var(--bark);
+      line-height: 1.8;
+      padding-left: 38px;
+      position: relative;
+    }
+
+    .faq-answer::before {
+      content: 'A';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--moss);
+      background: rgba(107,124,92,0.18);
+      padding: 2px 7px;
+      border-radius: 2px;
+      line-height: 1.6;
+    }
+
+    /* stagger animations */
+    .faq-item:nth-child(1)  { animation-delay: 0.10s; }
+    .faq-item:nth-child(2)  { animation-delay: 0.17s; }
+    .faq-item:nth-child(3)  { animation-delay: 0.24s; }
+    .faq-item:nth-child(4)  { animation-delay: 0.31s; }
+    .faq-item:nth-child(5)  { animation-delay: 0.38s; }
+    .faq-item:nth-child(6)  { animation-delay: 0.45s; }
+    .faq-item:nth-child(7)  { animation-delay: 0.52s; }
+    .faq-item:nth-child(8)  { animation-delay: 0.59s; }
+    .faq-item:nth-child(9)  { animation-delay: 0.66s; }
+    .faq-item:nth-child(10) { animation-delay: 0.73s; }
+    .faq-item:nth-child(11) { animation-delay: 0.80s; }
+    .faq-item:nth-child(12) { animation-delay: 0.87s; }
+    .faq-item:nth-child(13) { animation-delay: 0.94s; }
+    .faq-item:nth-child(14) { animation-delay: 1.01s; }
+    .faq-item:nth-child(15) { animation-delay: 1.08s; }
+    .faq-item:nth-child(16) { animation-delay: 1.15s; }
+    .faq-item:nth-child(17) { animation-delay: 1.22s; }
+    .faq-item:nth-child(18) { animation-delay: 1.29s; }
+    .faq-item:nth-child(19) { animation-delay: 1.36s; }
+    .faq-item:nth-child(20) { animation-delay: 1.43s; }
+    .faq-item:nth-child(21) { animation-delay: 1.50s; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 36px 0 28px;
+      opacity: 0.45;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: repeating-linear-gradient(90deg, var(--bark) 0, var(--bark) 4px, transparent 4px, transparent 10px);
+    }
+    .divider span { font-size: 22px; color: var(--sage); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--soil);
+      color: var(--hay-light);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      border-top: 4px solid var(--hay);
+    }
+    footer a { color: var(--hay); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .faq-item { padding: 20px 18px; }
+      .faq-answer { padding-left: 32px; }
+      header::before, header::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="header-eyebrow">Green Goose Farm &nbsp;·&nbsp; Est. 2012</p>
+    <h1>Farming Club FAQ</h1>
+    <div class="header-rule">
+      <span></span>
+      <em>🌾</em>
+      <span></span>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="faq-intro">
+      <p>Everything you wanted to know about joining the Green Goose Farming Club.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>How do you select club members?</div>
+      <div class="faq-answer">We look for who would benefit most from the experience, who would fit the vibe of the farm, and who would fit in with the other members.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>What does a typical day look like?</div>
+      <div class="faq-answer">Initially, work will involve prepping the field and work site, then move to amendments, irrigation, fencing, and making starts. Planting, and weeding, weeding, weeding. Short term greens can be harvested and replanted, vines staked, more plants added, mistakes corrected, weeding, etc, etc.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Will you teach irrigation?</div>
+      <div class="faq-answer">Like most things, this will be taught by observation and direct experience.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>How large are the growing spaces offered?</div>
+      <div class="faq-answer">This depends on what the group decides. Initial layout is around 75'×35'. More is possible, depending on how much people want to take on. This is a communal plot, shared between club members.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>How does plot designation work?</div>
+      <div class="faq-answer">The club follows a village peasant model with a single piece of land, worked by many hands. Joint work with shared harvest, but members can decide among themselves about personal crops or experiments.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Are these raised beds or in-ground beds?</div>
+      <div class="faq-answer">This is a pasture-based farm. As with historic practice, sections of pasture are occasionally broken for cropping. After vegetables, the area will be turned back over to animals to restore fertility.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>What is the type of soil, and what grows in it?</div>
+      <div class="faq-answer">The base soil in the northern Petaluma watershed valley is a heavy clay. Pasture management with animals results in high organic material content, producing a rich friable loam. Most everything grows well, with the exception of plants that prefer sandy soil (such as potatoes).</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>What are the limits to what can be grown?</div>
+      <div class="faq-answer">Only your imagination! Well, actually there are limits to water, time, labor, and costs. But these are things we can work on together.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Is there only space for annual crops?</div>
+      <div class="faq-answer">This whole thing is an experiment for this season. Perennial crops and long-term projects are a different, bigger question.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Do you have access to hoop houses and nursery space?</div>
+      <div class="faq-answer">I wish I had hoop houses. There is a rather sad greenhouse we can use though.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>What kinds of produce are typically included through the season?</div>
+      <div class="faq-answer">The farm has produced melons, squash, corn, tomatoes, pepper, beets, carrots, kale, chard, beans, tomatillos, onions, herbs, sunflowers, flowers, etc. in past years. It is up to club members what they raise this season.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Can I bring my own seeds?</div>
+      <div class="faq-answer">Absolutely! The farm only has a few from other seasons. Club members will have to decide and procure most of what you will plant.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Can I bring my family, friends, or dog?</div>
+      <div class="faq-answer">This is a six-member club, not a public garden plot. Think of it like opening up your house to have people come in and use your kitchen, living room, and office — we have to negotiate this private/public balance. Definitely no pets; this is an animal farm. On the other hand, we hope friends and family will be able to see what you achieve here.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>What about gophers?</div>
+      <div class="faq-answer">We have plenty of them; you don't have to bring any more.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>If I'm not selected, are there volunteer opportunities?</div>
+      <div class="faq-answer">Possibly. The main thing is to not make more management work for the landed peasant guy (me). We host travelers and interns year-round already.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Is the work schedule flexible? Can I just come once a week?</div>
+      <div class="faq-answer">Yes. The schedule is up to you, as long as you can get in 3 hours of fun at least one day a week, on either of the two days and times listed in the flyer.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Does the farm have dairy animals, and are there opportunities to help care for them?</div>
+      <div class="faq-answer">We had to give away our dairy goats a few years ago, as we thought we were losing the farm. We hope to have goats and a cow/calf pair some day. This club is for vegetable production, and animal care is not part of it per se — but for those interested, I love to teach. I just have to preserve my time.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Are there skills you recommend focusing on for someone interested in cheesemaking and small-scale agriculture?</div>
+      <div class="faq-answer">Pasture-based animal husbandry is a master skill. There is plenty to learn of this here.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Who owns the farm?</div>
+      <div class="faq-answer">I do.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Is there a longer-term vision to scale this program?</div>
+      <div class="faq-answer">A key goal here is to create a farming club model that can be replicated on other farm properties throughout the County.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>Who came up with this idea, and do more farmers do this?</div>
+      <div class="faq-answer">Thank you so much for saying this! I know of one farm in Corvallis, Oregon that is doing something similar. I hope we can convince others to consider inviting community to their land.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span class="q-label">Q</span>How many years has this been going on?</div>
+      <div class="faq-answer">This is the first year. We can be the first to try to make this work. No pressure though…</div>
+    </div>
+
+    <div class="divider"><span>🌱</span></div>
+
+  </main>
+
+  <footer>
+    <p>Green Goose Farm &nbsp;·&nbsp; Est. 2012 &nbsp;·&nbsp; Petaluma, California</p>
+  </footer>
+
+</body>
+</html>
